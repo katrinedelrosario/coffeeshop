@@ -1,16 +1,16 @@
 import express from 'express'
 import dotenv from "dotenv";
-import db from './db.config.js'
+import db from './config/db.config.js'
+import { productRouter } from './routes/product.router.js';
+import { categoryRouter } from './routes/category.router.js';
 
-db.query(`SELECT id,firstname FROM user` , (err, result) => {
-    console.log(result)
 
-  });
+// db.query(`SELECT id,firstname FROM user` , (err, result) => {
+//     console.log(result)
 
-const app = express();
-
+//   });
 dotenv.config();
-
+const app = express();
 const port = process.env.PORT;
 
 app.get("/", (req, res) => {
@@ -21,17 +21,9 @@ app.get("/contact", (req, res) => {
     res.send()
 })
 
-app.get("/api", (req, res) => {
-   db.query(`SELECT id,firstname FROM user` , (err, result) => {
-    if (err) {
-        console.log(err)
-    } else {
-        res.json(result)
-    }
-   })
-
-})
-
 app.listen(port, () => {
     console.log("server runs on port port 5500: http://localhost:5500/")
 })
+
+app.use(productRouter)
+app.use(categoryRouter)
