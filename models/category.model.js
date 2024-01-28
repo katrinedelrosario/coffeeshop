@@ -1,10 +1,10 @@
 import sequelize from '../config/sequelize.config.js'
 import { DataTypes, Model }from 'sequelize'
-import Product from './product.model.js'
+import ProductModel from './product.model.js'
 
-class Category extends Model {}
+class CategoryModel extends Model {}
 
-Category.init({
+CategoryModel.init({
     id: {
         type:DataTypes.BIGINT,
         autoIncrement: true,
@@ -27,9 +27,6 @@ Category.init({
     timestamps: false
 })
 
-Category.hasMany(Product, {
-    foreignKey: 'category_id',
-    as: 'products'
-})
+
 
 export default CategoryModel

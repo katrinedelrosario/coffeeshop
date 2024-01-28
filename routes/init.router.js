@@ -14,4 +14,4 @@ router.get('/init', async (req, res) => {
 	}
 })
 
-export {router}
+export {router as initRouter}

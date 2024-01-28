@@ -1,5 +1,10 @@
-import CategoryModel from "../models/category.model";
+import CategoryModel from "../models/category.model.js";
+import ProductModel from "../models/product.model.js";
 
+CategoryModel.hasMany(ProductModel, {
+    foreignKey: 'category_id',
+    as: 'products'
+})
 class categoryController {
     constructor() {
         console.log('method executed when category controller is called');
@@ -23,7 +28,7 @@ class categoryController {
             const result = await CategoryModel.create(req.body)
             res.json({
                 message: 'category created',
-                new_id: result.insertId()
+                new_id: result.id()
             })
         }
     }

@@ -1,7 +1,5 @@
 import express from 'express'
-import categoryController from '../controllers/category.controller';
-
-const app = express();
+import categoryController from '../controllers/category.controller.js';
 const router = express.Router()
 const category = new categoryController
 category.list
@@ -32,11 +30,6 @@ router.put('/categories', (req,res) => {
 router.delete('/categories', (req, res) => {
     const {id} = req.body
     console.log(`route to delete specific category from formbody: ${id}`);
-})
-
-//not found
-app.use((req, res, next) => {
-    res.status(404).send('page not found😕')
 })
 
 export {router as categoryRouter}

@@ -1,7 +1,12 @@
-import CategoryModel from "../models/category.model";
-import ProductModel from "../models/product.model";
+import CategoryModel from "../models/category.model.js";
+import ProductModel from "../models/product.model.js";
 
-class productController {
+ProductModel.belongsTo(CategoryModel, {
+    foreignKey: 'category_id',
+    as: 'category'
+})
+
+class ProductController {
     constructor() {
         console.log('method executed when product controller is called');
     }
@@ -28,7 +33,7 @@ class productController {
 
             res.json({
                 message: 'product created',
-                new_id: result.insertId()
+                new_id: result.id()
             })
         }
     }
@@ -55,4 +60,4 @@ class productController {
     }
 }
 
-export default productController
+export default ProductController
