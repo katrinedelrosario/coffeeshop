@@ -55,7 +55,7 @@ class CategoryController {
            try {
              const model = await CategoryModel.create({title})
              res.status(201).json({
-                 new_id: model.id(),
+                 new_id: model.id,
                  message: `category id: ${model.id} created`
              })
            } catch (err) {
