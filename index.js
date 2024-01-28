@@ -11,19 +11,34 @@ import { categoryRouter } from './routes/category.router.js';
 //   });
 dotenv.config();
 const app = express();
-const port = process.env.PORT;
-
-app.get("/", (req, res) => {
-    res.send("welcome to my API")
-})
-
-app.get("/contact", (req, res) => {
-    res.send()
-})
-
-app.listen(port, () => {
-    console.log("server runs on port port 5500: http://localhost:5500/")
-})
+app.use(express.urlencoded({extended:true}))
 
 app.use(productRouter)
 app.use(categoryRouter)
+
+app.use(express.json())
+
+// app.use((req, res, next) => {
+//     res.append('Access-Control-Allow-Origin', )
+// })
+
+const port = (process.env.PORT || 4000)
+app.listen(port, () => {
+    console.log(`server running on http://localhost:${port}`);
+})
+
+
+//pages
+app.get("/", (req, res) => {
+    res.send('frontpage')
+})
+
+app.get("/products", (req, res) => {
+    res.send('products🛍️')
+})
+
+app.use((req, res, next) =>{
+    res.status(404).send('site not found😕')
+})
+
+

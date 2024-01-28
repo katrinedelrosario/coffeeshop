@@ -74,4 +74,4 @@ Product.belongsTo(Category, {
     as: 'category'
 })
 
-export default Product
+export default ProductModel

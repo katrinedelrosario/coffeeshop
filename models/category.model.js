@@ -32,4 +32,4 @@ Category.hasMany(Product, {
     as: 'products'
 })
 
-export default Category
+export default CategoryModel

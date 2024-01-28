@@ -4,7 +4,7 @@ import product from '../models/product.model.js'
 
 const router = express.Router()
 
-router.get('/install', async (req, res) => {
+router.get('/init', async (req, res) => {
 	try {
 		await sequelize.sync()
 		res.sendStatus(200)
@@ -14,4 +14,4 @@ router.get('/install', async (req, res) => {
 	}
 })
 
-export {router as installRouter}
+export {router}

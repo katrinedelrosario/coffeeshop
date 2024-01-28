@@ -1,18 +1,21 @@
-import Product from "../models/product.model";
+import CategoryModel from "../models/category.model";
+import ProductModel from "../models/product.model";
 
 class productController {
     constructor() {
         console.log('method executed when product controller is called');
     }
     list = async (req, res) => {
-        const result = await Product.findAll()
+        const result = await ProductModel.findAll({
+            include: CategoryModel
+        })
         res.json(result)
         console.log('list-method (product controller)');
     }
 
     details = async () => {
         const {id} = req.params //gets id from the url param
-        const result = await Product.findOne({
+        const result = await ProductModel.findOne({
             where: {id: id}
         })
         res.json(result)
@@ -21,7 +24,7 @@ class productController {
     create = async () => {
         const {title, price, image_url, description, roastlevel, weight, category_id } = req.body //gets form data
         if(title && price && image_url && description && roastlevel && weight && category_id ) {
-            const result = await Product.create(req.body)
+            const result = await ProductModel.create(req.body)
 
             res.json({
                 message: 'product created',
@@ -33,7 +36,7 @@ class productController {
     update = async () => {
         const {id, title, price, image_url, description, roastlevel, weight, category_id} = req.body
         if (id && title && price && image_url && description && roastlevel && weight && category_id ) {
-            const result = await Product.update(req.body)
+            const result = await ProductModel.update(req.body)
 
             res.json({
                 message: 'product updated'
@@ -43,7 +46,7 @@ class productController {
 
     delete = async (req, res) => {
         const {id} = req.params
-        await Product.destroy({
+        await ProductModel.destroy({
             where: {id: id}
         })
         res.status(200).send({
