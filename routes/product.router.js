@@ -1,37 +1,25 @@
 import express from 'express'
-import ProductController from '../controllers/product.controller.js';
+import {ProductController} from '../controllers/product.controller.js';
 
+const controller = new ProductController()
 const router = express.Router()
-const product = new ProductController
-product.list
+
+
 
 //list all
-router.get('/products', (req, res) => {
-    console.log('route to all products');
-})
+router.get('/products', controller.list);
 
 //list specific
-router.get('/products/:id([0-9]*)', (req, res) => {
-    const {id} = req.params
-    console.log(`route to specific product details by id: ${id}`);
-})
+router.get('/products/:id([0-9]*)', controller.details);
+
 
 //create
-router.post('/products', (req, res) => {
-    const {id, title, price, image_url, description, roastlevel, weight, category_id } = req.body
-    console.log('route to create product', req.body)
-})
+router.post('/products', controller.create);
 
 //update specific
-router.put('/products', (req,res) => {
-    const {id, title, price, image_url, description, roastlevel, weight, category_id } = req.body
-    console.log('route to update specific product', req.body);
-})
+router.put('/products/:id([0-9]*)', controller.update);
 
 //delete specific
-router.delete('/products', (req, res) => {
-    const {id} = req.body
-    console.log(`route to delete specific product from formbody: ${id}`);
-})
+router.delete('/products/:id([0-9]*)', controller.delete);
 
-export {router as productRouter}
+export {router as ProductRouter}

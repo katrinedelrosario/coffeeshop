@@ -1,6 +1,5 @@
 import sequelize from '../config/sequelize.config.js'
 import { DataTypes, Model }from 'sequelize'
-import CategoryModel from './category.model.js'
 
 class ProductModel extends Model {}
 
@@ -14,7 +13,7 @@ ProductModel.init({
     },
     title: {
         type:
-        DataTypes.TEXT,
+        DataTypes.STRING,
         autoIncrement: false,
         allowNull: false,
         primaryKey:false

@@ -1,6 +1,5 @@
 import express from 'express'
 import sequelize from '../config/sequelize.config.js'
-import product from '../models/product.model.js'
 
 const router = express.Router()
 
